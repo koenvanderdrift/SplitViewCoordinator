@@ -2,6 +2,6 @@
 
 This is an attempt to use a Coordinator with a UISplitViewController. Based on MasterDetail project in Xcode.
 
-To Do:
+To make this work, the Coordinator needs to know about the segue destination, otherwise the detail is never updated. By design, UISplitViewController replaces the DetailViewController and its NavigationController with every segue. So we cannot keep a reference to the DetailViewController and swap out its contents. The Coordinator also needs to know about the segue identifier, since it needs to make decisions if there are more than one segues. So, for now I am just passing the segue to the Coordinator (which is a delegate of the MasterViewController).
 
-* masterViewController delegate is nil in prepare(for segue)
+I have seen articles where they use swiffling, but that seems overly complicated.
