@@ -12,19 +12,10 @@ class SplitViewCoordinator: NSObject, Coordinator {
     var splitViewController: UISplitViewController?
     
     private lazy var masterViewController: MasterViewController =  {
-        let controllers = splitViewController?.viewControllers
-        let masterNC = controllers?.first as! UINavigationController
+        let masterNC = splitViewController?.viewControllers.first as! UINavigationController
         let masterVC = masterNC.topViewController as! MasterViewController
         
         return masterVC
-    }()
-    
-    private lazy var detailViewController: DetailViewController = {
-        let controllers = splitViewController?.viewControllers
-        let detailNC = controllers?.last as! UINavigationController
-        let detailVC = detailNC.topViewController as! DetailViewController
-
-        return detailVC
     }()
     
     init(splitViewController: UISplitViewController) {
@@ -33,15 +24,21 @@ class SplitViewCoordinator: NSObject, Coordinator {
     
     func start() {
         splitViewController?.delegate = self
+        splitViewController?.preferredDisplayMode = .allVisible
+
         masterViewController.delegate = self
         
-        detailViewController.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+        let detailNC = splitViewController?.viewControllers.last as! UINavigationController
+        let detailVC = detailNC.topViewController as! DetailViewController
+        detailVC.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
     }
- }
+}
 
 extension SplitViewCoordinator: UISplitViewControllerDelegate {
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController:UIViewController, onto primaryViewController:UIViewController) -> Bool {
-        if detailViewController.detailItem == nil {
+        guard let detailNC = secondaryViewController as? UINavigationController else { return false }
+        guard let detailVC = detailNC.topViewController as? DetailViewController else { return false }
+        if detailVC.detailItem == nil {
             // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
             return true
         }
@@ -50,8 +47,15 @@ extension SplitViewCoordinator: UISplitViewControllerDelegate {
 }
 
 extension SplitViewCoordinator: MasterViewControllerDelegate {
-    func showDetail() {
-        let object = masterViewController.selectedObject()
-            detailViewController.detailItem = object
+    func handleSegue(segue: UIStoryboardSegue) {
+        if segue.identifier == "showDetail" {
+            guard let detailNC = segue.destination as? UINavigationController,
+                let detailVC = detailNC.topViewController as? DetailViewController else { fatalError() }
+
+            let object = masterViewController.selectedObject()
+            detailVC.detailItem = object
+            detailVC.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+            detailVC.navigationItem.leftItemsSupplementBackButton = true
+        }
     }
 }
