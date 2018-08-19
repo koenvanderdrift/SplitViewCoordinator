@@ -12,14 +12,21 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    var splitViewCoordinator: SplitViewCoordinator?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        let splitViewController = window!.rootViewController as! UISplitViewController
-        let splitViewCoordinator = SplitViewCoordinator(splitViewController: splitViewController)
+
+        window = UIWindow()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+
+        let splitViewController = storyboard.instantiateInitialViewController() as! UISplitViewController
+        window?.rootViewController = splitViewController
         
-        splitViewCoordinator.start()
+        splitViewCoordinator = SplitViewCoordinator(splitViewController: splitViewController)
+        splitViewCoordinator?.start()
+
+        window?.makeKeyAndVisible()
         
         return true
     }
