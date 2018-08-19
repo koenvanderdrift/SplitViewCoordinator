@@ -15,6 +15,7 @@
 		5D261D05212888CB00069088 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D261D03212888CB00069088 /* LaunchScreen.storyboard */; };
 		5D261D0D212888E600069088 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D261D0C212888E600069088 /* Coordinator.swift */; };
 		5D261D0F212888F700069088 /* SplitViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D261D0E212888F700069088 /* SplitViewCoordinator.swift */; };
+		5DA0C5E72129D5ED00AFB08D /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA0C5E62129D5ED00AFB08D /* Storyboard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		5D261D06212888CB00069088 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5D261D0C212888E600069088 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		5D261D0E212888F700069088 /* SplitViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewCoordinator.swift; sourceTree = "<group>"; };
+		5DA0C5E62129D5ED00AFB08D /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,12 +65,13 @@
 				5D261CF8212888C800069088 /* AppDelegate.swift */,
 				5D261CFA212888C800069088 /* MasterViewController.swift */,
 				5D261CFC212888C800069088 /* DetailViewController.swift */,
+				5D261D0E212888F700069088 /* SplitViewCoordinator.swift */,
 				5D261CFE212888C800069088 /* Main.storyboard */,
 				5D261D01212888CA00069088 /* Assets.xcassets */,
 				5D261D03212888CB00069088 /* LaunchScreen.storyboard */,
 				5D261D06212888CB00069088 /* Info.plist */,
 				5D261D0C212888E600069088 /* Coordinator.swift */,
-				5D261D0E212888F700069088 /* SplitViewCoordinator.swift */,
+				5DA0C5E62129D5ED00AFB08D /* Storyboard.swift */,
 			);
 			path = SplitViewCoordinator;
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 				5D261CFD212888C800069088 /* DetailViewController.swift in Sources */,
 				5D261CFB212888C800069088 /* MasterViewController.swift in Sources */,
 				5D261CF9212888C800069088 /* AppDelegate.swift in Sources */,
+				5DA0C5E72129D5ED00AFB08D /* Storyboard.swift in Sources */,
 				5D261D0F212888F700069088 /* SplitViewCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

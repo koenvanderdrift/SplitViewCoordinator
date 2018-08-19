@@ -26,7 +26,7 @@ class SplitViewCoordinator: NSObject, Coordinator {
         splitViewController?.delegate = self
         splitViewController?.preferredDisplayMode = .allVisible
 
-        masterViewController.delegate = self
+        masterViewController.coordinationDelegate = self
         
         let detailNC = splitViewController?.viewControllers.last as! UINavigationController
         let detailVC = detailNC.topViewController as! DetailViewController
@@ -46,12 +46,12 @@ extension SplitViewCoordinator: UISplitViewControllerDelegate {
     }
 }
 
-extension SplitViewCoordinator: MasterViewControllerDelegate {
-    func handleSegue(segue: UIStoryboardSegue) {
-        if segue.identifier == "showDetail" {
-            guard let detailNC = segue.destination as? UINavigationController,
+extension SplitViewCoordinator: CoordinationDelegate {
+    func coordinate(from source: Coordinated, to destination: UIViewController, identifier id: String?) {
+        if id == "showDetail" {
+            guard let detailNC = destination as? UINavigationController,
                 let detailVC = detailNC.topViewController as? DetailViewController else { fatalError() }
-
+            
             let object = masterViewController.selectedObject()
             detailVC.detailItem = object
             detailVC.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem

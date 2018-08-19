@@ -8,14 +8,9 @@
 
 import UIKit
 
-protocol MasterViewControllerDelegate: class {
-    func handleSegue(segue: UIStoryboardSegue)
-}
-
-class MasterViewController: UITableViewController {
-
+class MasterViewController: UITableViewController, Coordinated {
+    var coordinationDelegate: CoordinationDelegate?
     var objects = [Any]()
-    weak var delegate: MasterViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,11 +35,6 @@ class MasterViewController: UITableViewController {
 
     // MARK: - Segues
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // When a segue is triggered, you only give to the coordinator the responsibility to configure the next view controller.
-        delegate?.handleSegue(segue: segue)
-    }
-    
     func selectedObject() -> NSDate {
         guard let indexPath = tableView.indexPathForSelectedRow else { fatalError("invalid index path")
         }

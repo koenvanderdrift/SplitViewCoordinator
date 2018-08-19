@@ -6,8 +6,20 @@
 //  Copyright © 2018 Koen van der Drift. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-protocol Coordinator {
+protocol Coordinator: class {
     func start()
+}
+
+protocol Coordinated: class {
+    var coordinationDelegate: CoordinationDelegate? { get set }
+}
+
+protocol CoordinationDelegate: class {
+    func coordinate(from source: Coordinated, to destination: UIViewController, identifier id: String?)
+}
+
+extension CoordinationDelegate {
+    public func coordinate(data source: AnyObject, from controller: Coordinated) {}
 }
